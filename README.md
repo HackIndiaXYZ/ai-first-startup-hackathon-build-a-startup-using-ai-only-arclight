@@ -1,211 +1,284 @@
-# 🤖 AI Co-Founder
+# 🤖 AI Co-Founder — The Autonomous Chief-of-Staff for Solo & Early Founders
 
-**An AI chief-of-staff for early-stage founders** — triages your inbox, flags anything time-critical (investor follow-ups, customer issues, deadlines), drafts responses in your voice, and turns the week's activity into a ready-to-send investor update.
+<div align="center">
 
-![AI Co-Founder Dashboard](docs/assets/dashboard-screenshot.png)
+[![Live Demo](https://img.shields.io/badge/Live%20Demo-ai--cofounder--gilt.vercel.app-7c3aed?style=for-the-badge&logo=vercel&logoColor=white)](https://ai-cofounder-gilt.vercel.app/dashboard)
+[![GitHub Repo](https://img.shields.io/badge/GitHub-Devengoyal885%2FAI--Cofounder-black?style=for-the-badge&logo=github)](https://github.com/Devengoyal885/AI-Cofounder)
+[![Hackathon](https://img.shields.io/badge/HackIndia-AI--First%20Startup%20Track-orange?style=for-the-badge)](https://github.com/HackIndiaXYZ/ai-first-startup-hackathon-build-a-startup-using-ai-only-arclight)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg?style=for-the-badge)](LICENSE)
+
+<br />
+
+**Never drop a deal, miss a deadline, or delay an investor update again.**  
+*AI Co-Founder proactively triages your founder inbox, flags critical commitments, drafts high-converting context-aware replies in your voice, and auto-synthesizes the week's traction into investor-ready updates and slide decks.*
+
+<br />
+
+[🚀 **Explore Live Dashboard**](https://ai-cofounder-gilt.vercel.app/dashboard) • [✨ **Landing Page**](https://ai-cofounder-gilt.vercel.app) • [📖 **Prompt Library**](docs/prompts/) • [🏗️ **Architecture**](#-system-architecture)
+
+<br />
+
+<img src="docs/assets/dashboard-screenshot.png" alt="AI Co-Founder Dashboard" width="100%" style="border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.3);" />
+
+</div>
 
 ---
 
-## The Problem
+## ⚡ Quick Links & Live Deployments
 
-Solo and early-stage founders lose deals and miss commitments because nothing proactively surfaces what matters out of inbox noise. You're juggling investor threads, customer escalations, compliance deadlines, and hiring approvals — all mixed in with newsletters and cold outreach. A human co-founder would own this ops layer. Most founders don't have one yet.
-
-## The Solution
-
-AI Co-Founder acts as your AI chief-of-staff. It classifies every email into Investor, Customer, Urgent/Deadline, or Noise; extracts deadlines and action items; presents a prioritized dashboard with trend analytics; generates contextual reply drafts in your preferred tone; and synthesizes the week's activity into a polished investor update email with a mini slide deck.
-
-## 🔗 Links
-
-| | Link |
-|---|---|
-| **Live Demo** | [ADD VERCEL URL] |
-| **Demo Video** | [ADD DEMO VIDEO LINK] |
-| **GitHub Repo** | [github.com/Devengoyal885/AI-Cofounder](https://github.com/Devengoyal885/AI-Cofounder) |
+| Resource | Link |
+| :--- | :--- |
+| 🌐 **Live Web App (Dashboard)** | [**ai-cofounder-gilt.vercel.app/dashboard**](https://ai-cofounder-gilt.vercel.app/dashboard) |
+| 🏠 **Landing Page** | [**ai-cofounder-gilt.vercel.app**](https://ai-cofounder-gilt.vercel.app) |
+| 📬 **Triage & Auto-Draft Feed** | [**ai-cofounder-gilt.vercel.app/dashboard/feed**](https://ai-cofounder-gilt.vercel.app/dashboard/feed) |
+| 📊 **Investor Update & Slide Deck** | [**ai-cofounder-gilt.vercel.app/dashboard/investor-update**](https://ai-cofounder-gilt.vercel.app/dashboard/investor-update) |
+| 🐙 **Primary GitHub Repository** | [**Devengoyal885/AI-Cofounder**](https://github.com/Devengoyal885/AI-Cofounder) |
+| 🏆 **Hackathon Submission Repository** | [**HackIndiaXYZ/ai-first-startup-hackathon**](https://github.com/HackIndiaXYZ/ai-first-startup-hackathon-build-a-startup-using-ai-only-arclight) |
 
 ---
 
-## Architecture
+## 🎯 The Problem
+
+Early-stage and solo founders wear 10 hats simultaneously. Every day brings a relentless avalanche of inbound communication:
+
+* **High-stakes VC emails** requesting urgent Cap Tables and due diligence.
+* **Customer escalation tickets** threatening enterprise churn.
+* **Critical compliance & legal deadlines** that risk penalties if missed.
+* **Noise & cold outreach** burying the signals that actually move the needle.
+
+Human co-founders and Chiefs of Staff traditionally manage this operational layer. But when you are solo or pre-scale, **inbox chaos means missed deals, broken commitments, and lost momentum**.
+
+---
+
+## 💡 The Solution
+
+**AI Co-Founder** replaces that missing operational partner with a specialized, multi-agent AI pipeline powered by **Google Gemini**:
+
+1. 🔍 **Autonomous Inbox Triage**: Instant classification into `Investor`, `Customer`, `Urgent/Deadline`, or `Noise` with 1–5 urgency ranking and ISO deadline extraction.
+2. 📊 **Command Center Dashboard**: Real-time operational pulse, active deadlines, categorical email breakdowns, and priority trends.
+3. ✍️ **Voice-Tuned Auto-Drafts**: Contextual email replies drafted in seconds with selectable tone profiles (*Direct*, *Warm*, or *Formal*).
+4. 📈 **Auto-Generated Investor Updates**: Transforms a week's operational events into a clean markdown newsletter and a 5-slide mini pitch deck.
+
+---
+
+## 📸 Product Walkthrough & Visuals
+
+### 1. 🎛️ Founder Command Dashboard
+> Proactively surfaces imminent deadlines, urgency distributions, and actionable open loops.
+
+<p align="center">
+  <img src="docs/assets/dashboard-screenshot.png" alt="Command Dashboard" width="95%" style="border-radius: 8px;" />
+</p>
+
+---
+
+### 2. ⚡ AI Triage & Voice-Tuned Auto-Drafting
+> Instant classification with tone-switchable draft replies referencing specific thread details.
+
+<p align="center">
+  <img src="docs/assets/feed-screenshot.png" alt="Triage and Feed" width="95%" style="border-radius: 8px;" />
+</p>
+
+---
+
+### 3. 📋 Weekly Investor Updates & Mini Slide Deck
+> One-click synthesis from raw weekly activity into investor communications and slide presentations.
+
+<p align="center">
+  <img src="docs/assets/investor-update-screenshot.png" alt="Investor Updates and Slides" width="95%" style="border-radius: 8px;" />
+</p>
+
+---
+
+### 4. 🚀 Minimalist Landing Interface
+> Clean onboarding experience with instant Demo Mode access.
+
+<p align="center">
+  <img src="docs/assets/landing-screenshot.png" alt="Landing Page" width="95%" style="border-radius: 8px;" />
+</p>
+
+---
+
+## 🏗️ System Architecture
 
 ```mermaid
 flowchart TD
-    subgraph Input
-        A[📧 Seeded Demo Emails\n18 realistic emails] --> B
-        A2[📬 Live Gmail\nstretch goal] -.-> B
+    subgraph Ingestion["📥 Ingestion Layer"]
+        A["📧 Seeded Demo Inbound\n(18 Realistic Founder Emails)"]
+        A2["📬 Live Mail Provider\n(Roadmap)"]
     end
 
-    subgraph AI Agents
-        B[🔍 Triage Agent\nClassify • Prioritize • Extract Deadlines]
-        B --> C[📊 Dashboard\nPrioritized Feed • Open Loops\nTrend Charts • Deadlines]
-        B --> D[✍️ Auto-Draft Agent\nDirect • Warm • Formal]
-        B --> E[📋 Weekly Update Agent\nInvestor Email • Slide Deck]
+    subgraph CoreAgents["🤖 Autonomous Agent Pipeline"]
+        B["🔍 Triage & Urgency Agent\n• Category Classification\n• Priority Scoring (1-5)\n• Deadline & Action Extraction"]
+        C["✍️ Auto-Draft Agent\n• Persona-Adaptive (Direct / Warm / Formal)\n• Contextual Thread Grounding\n• Placeholder Identification"]
+        D["📊 Weekly Update & Deck Agent\n• Traction & Milestone Synthesis\n• Structured Markdown Newsletter\n• 5-Slide Pitch Deck Generator"]
     end
 
-    subgraph Infrastructure
-        F[🧠 Google Gemini API\ngemini-2.5-flash]
-        G[🗄️ Supabase\nAuth + Postgres]
+    subgraph Intelligence["🧠 AI & Cloud Infrastructure"]
+        E["⚡ Google Gemini API\n(gemini-2.5-flash / GoogleGenAI)"]
+        F["🗄️ Supabase\n(PostgreSQL + Storage)"]
+        G["🚀 Vercel Edge Cloud\n(Next.js App Router)"]
     end
 
-    B <--> F
-    D <--> F
-    E <--> F
-    C --> G
-    D --> G
-
-    subgraph Output
-        C --> H[👤 Founder]
-        D --> H
-        E --> H
+    subgraph UI["🖥️ Founder Interfaces"]
+        H["📊 Command Center Analytics"]
+        I["📬 Prioritized Action Feed"]
+        J["📑 Investor Update & Deck Viewer"]
     end
+
+    A --> B
+    A2 -.-> B
+    B <--> E
+    C <--> E
+    D <--> E
+    
+    B --> H
+    B --> I
+    C --> I
+    D --> J
+    
+    H --- G
+    I --- G
+    J --- G
+    G --- F
 ```
 
 ---
 
-## How It Works
+## 🤖 Deep Dive: AI Agents & Prompt Engineering
 
-### 🔍 Triage Agent
-Takes a batch of emails and classifies each into **Investor**, **Customer**, **Urgent/Deadline**, or **Noise**. For anything with a deadline or time-sensitive ask, it extracts the specific date and action into structured JSON and assigns a priority score (1-5). The full pipeline runs through Google Gemini's API in a single batch call for efficiency. → [View prompt](docs/prompts/triage-agent.md)
+Every agent operates with strict system instructions and typed output validation:
 
-### ✍️ Auto-Draft Agent
-For any flagged email, generates a suggested reply in the founder's voice with a configurable tone setting: **Direct** (concise, no-fluff), **Warm** (friendly, relationship-building), or **Formal** (polished, board-appropriate). The founder can edit the draft and mark it as "sent" — no real email sending required, this is a productivity workflow. → [View prompt](docs/prompts/draft-agent.md)
-
-### 📋 Weekly Update Agent
-Synthesizes the week's triaged data — deals moved, customer themes, resolved and open items — into a ready-to-send **investor update email** formatted in markdown, plus a **4-5 slide mini pitch-style summary**. This same agent was used to help draft parts of the actual hackathon pitch deck. → [View prompt](docs/prompts/weekly-update-agent.md)
-
----
-
-## Backstory
-
-This project builds on the **classify → extract urgency/deadlines → alert → dashboard → AI-drafted action** pattern proven in the builder's prior projects:
-
-- **MailIQ**: AI email classification, deadline extraction, and proactive alerting
-- **Bharat-Intelligence**: AI-classified triage feed and trend-analysis dashboard for a citizen-grievance platform
-
-AI Co-Founder applies that same proven architecture to the founder-ops problem — replacing the ops layer a human co-founder would normally own with an AI agent pipeline.
+| Agent | Model | Primary Responsibility | Prompt Spec |
+| :--- | :--- | :--- | :--- |
+| **🔍 Triage Agent** | `gemini-2.5-flash` | Classifies categories, assigns 1–5 urgency scores, extracts deadlines in ISO 8601, and extracts required founder actions in structured JSON. | [`triage-agent.md`](docs/prompts/triage-agent.md) |
+| **✍️ Auto-Draft Agent** | `gemini-2.5-flash` | Analyzes sender relationships and drafts personalized replies in 3 configurable founder tones: *Direct*, *Warm*, or *Formal*. | [`draft-agent.md`](docs/prompts/draft-agent.md) |
+| **📋 Weekly Update Agent** | `gemini-2.5-flash` | Aggregates all closed/open loops, customer signals, and investor activity into a professional investor email + 5 mini pitch slides. | [`weekly-update-agent.md`](docs/prompts/weekly-update-agent.md) |
 
 ---
 
-## Tech Stack
-
-| Layer | Technology |
-|-------|-----------|
-| **Frontend + Backend** | Next.js 16 (App Router) + TypeScript |
-| **Styling** | Tailwind CSS v4 + shadcn/ui |
-| **AI** | Google Gemini API (`gemini-2.5-flash`) |
-| **Database / Auth** | Supabase (Postgres + Auth) |
-| **Charts** | Recharts |
-| **Deployment** | Vercel |
-| **Package Manager** | npm |
-
----
-
-## AI Usage Report
-
-### Runtime AI (Production)
-- **Google Gemini `gemini-2.5-flash`** powers all three runtime agents (Triage, Draft, Weekly Update) via the Google Gen AI API
-- Each agent has a carefully crafted system prompt — see [`/docs/prompts/`](docs/prompts/)
-- The **Weekly Update Agent** was also used to help draft this hackathon's own pitch deck (it synthesizes real product activity into slide format)
-
-### Development AI
-- **Antigravity** was used for initial scaffolding, code generation, and deployment automation
-- Estimated AI-generated code: **~80%** of boilerplate/scaffold, **~50%** of core business logic (agent prompts, classification rules, dashboard components)
-- All AI-generated code was reviewed and iteratively refined by the builder
-
-### Prompt Transparency
-All three agent system prompts are committed as standalone markdown files:
-- [Triage Agent Prompt](docs/prompts/triage-agent.md)
-- [Draft Agent Prompt](docs/prompts/draft-agent.md)
-- [Weekly Update Agent Prompt](docs/prompts/weekly-update-agent.md)
-
----
-
-## Repo Structure
+## 🛠️ Technology Stack
 
 ```
-ai-cofounder/
-├── src/
-│   ├── app/                          → Next.js app pages
-│   │   ├── api/
-│   │   │   ├── triage/route.ts       → Triage API endpoint
-│   │   │   ├── draft/route.ts        → Draft API endpoint
-│   │   │   └── weekly-update/route.ts → Weekly update API endpoint
-│   │   ├── dashboard/
-│   │   │   ├── layout.tsx            → Dashboard shell with sidebar
-│   │   │   ├── page.tsx              → Main dashboard (stats, charts, deadlines)
-│   │   │   ├── feed/page.tsx         → Triage feed with draft panel
-│   │   │   └── investor-update/page.tsx → Weekly update views
-│   │   ├── layout.tsx                → Root layout
-│   │   ├── page.tsx                  → Landing page
-│   │   └── globals.css               → Design system & theme
-│   ├── components/
-│   │   ├── ui/                       → shadcn/ui primitives
-│   │   ├── trend-chart.tsx           → Recharts trend visualization
-│   │   └── deadline-list.tsx         → Deadline countdown list
-│   └── lib/
-│   │   ├── agents/
-│   │   │   ├── triage.ts             → Triage Agent (classify, extract, prioritize)
-│   │   │   ├── draft.ts              → Auto-Draft Agent (tone-aware replies)
-│   │   │   └── weekly-update.ts      → Weekly Update Agent (email + slides)
-│   │   ├── data/
-│   │   │   └── seed-emails.json      → 18 realistic demo emails
-│   │   ├── types.ts                  → TypeScript type definitions
-│   │   └── utils.ts                  → Utility functions
-├── docs/
-│   ├── prompts/
-│   │   ├── triage-agent.md           → Triage system prompt
-│   │   ├── draft-agent.md            → Draft system prompt
-│   │   └── weekly-update-agent.md    → Weekly update system prompt
-│   └── assets/                       → Screenshots & media
-├── .env.example                      → Environment variable template
-├── .gitignore
-├── LICENSE                           → MIT
-├── README.md                         → This file
-└── package.json
+Frontend & Framework   │ Next.js 16 (App Router, Turbopack, TypeScript)
+Styling & Design       │ Tailwind CSS v4 + shadcn/ui + Lucide Icons + Glassmorphism
+AI & LLM Engine        │ Google Gemini API (@google/genai, gemini-2.5-flash)
+Data Visualizations    │ Recharts (Time-series trends & priority breakdowns)
+Database & Storage     │ Supabase (PostgreSQL + Auth)
+Deployment & Edge      │ Vercel Cloud Platform
+Package Management     │ npm
 ```
 
 ---
 
-## Local Setup
+## 🚀 Getting Started Locally
 
-### Prerequisites
-- Node.js 18+
-- npm
-- Google Gemini API key ([get one on Google AI Studio](https://aistudio.google.com/))
+### 1. Prerequisites
+- **Node.js**: v18.0.0 or higher
+- **npm**: v9.0.0 or higher
+- **Google Gemini API Key**: [Get one on Google AI Studio](https://aistudio.google.com/) *(optional — works in Demo Mode out of the box)*
 
-### Steps
-
+### 2. Clone & Install
 ```bash
-# 1. Clone the repo
+# Clone the repository
 git clone https://github.com/Devengoyal885/AI-Cofounder.git
-cd AI-Cofounder
 
-# 2. Install dependencies
+# Navigate to project folder
+cd AI-Cofounder/ai-cofounder
+
+# Install dependencies
 npm install
+```
 
-# 3. Set up environment variables
+### 3. Configure Environment
+```bash
+# Copy example configuration
 cp .env.example .env.local
-# Edit .env.local and add your GEMINI_API_KEY
+```
 
-# 4. Run the dev server
+Add your Gemini API Key to `.env.local`:
+```env
+GEMINI_API_KEY=your_gemini_api_key_here
+```
+
+### 4. Run Development Server
+```bash
 npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) and click **Launch Dashboard**.
+Visit [**http://localhost:3000**](http://localhost:3000) or navigate directly to [**http://localhost:3000/dashboard**](http://localhost:3000/dashboard).
 
-> **💡 Demo Mode works without any API key** — the app includes a rule-based fallback triage engine. Adding your Gemini API key enables the full Gemini-powered AI agents for more accurate classification and natural draft generation.
-
----
-
-## Team / Hackathon Track
-
-| | |
-|---|---|
-| **Track** | AI SaaS Startup |
-| **Builder** | Dev Goyal |
-| **Hackathon** | 48-72 hour AI-first startup hackathon |
-| **Focus** | Real working deployment with visible agentic AI usage |
+> **💡 Zero-Config Demo Mode**: The application includes high-fidelity seeded founder emails and fallback rule-based classification so evaluators can test 100% of the UI flows even without configuring API keys.
 
 ---
 
-## License
+## 📁 Repository Structure
 
-[MIT](LICENSE)
+```
+ai-cofounder/
+├── docs/
+│   ├── assets/                       # High-res UI screenshots & media
+│   │   ├── dashboard-screenshot.png
+│   │   ├── feed-screenshot.png
+│   │   ├── investor-update-screenshot.png
+│   │   └── landing-screenshot.png
+│   └── prompts/                      # Standalone system prompt specifications
+│       ├── triage-agent.md
+│       ├── draft-agent.md
+│       └── weekly-update-agent.md
+├── src/
+│   ├── app/
+│   │   ├── api/
+│   │   │   ├── triage/route.ts       # Triage API endpoint (Gemini)
+│   │   │   ├── draft/route.ts        # Auto-Draft API endpoint (Gemini)
+│   │   │   └── weekly-update/route.ts# Investor Update API endpoint (Gemini)
+│   │   ├── dashboard/
+│   │   │   ├── layout.tsx            # Navigation sidebar shell
+│   │   │   ├── page.tsx              # Analytics, deadlines & stats overview
+│   │   │   ├── feed/page.tsx         # Prioritized inbox feed & draft drawer
+│   │   │   └── investor-update/page.tsx # Weekly memo & presentation slide deck
+│   │   ├── layout.tsx                # App root layout & providers
+│   │   ├── page.tsx                  # Hero landing page
+│   │   └── globals.css               # Design system & dark glass theme
+│   ├── components/
+│   │   ├── ui/                       # Reusable UI primitives
+│   │   ├── trend-chart.tsx           # Interactive analytics charts
+│   │   └── deadline-list.tsx         # Real-time deadline tracker
+│   └── lib/
+│       ├── agents/
+│       │   ├── triage.ts             # Google Gemini Triage Engine
+│       │   ├── draft.ts              # Google Gemini Tone-Aware Draft Engine
+│       │   └── weekly-update.ts      # Google Gemini Memo & Deck Engine
+│       ├── data/
+│       │   └── seed-emails.json      # 18 curated realistic founder scenarios
+│       ├── types.ts                  # Shared TypeScript definitions
+│       └── utils.ts                  # Formatting & helper utilities
+├── .env.example                      # Environment variables template
+├── .gitignore                        # Git exclusion rules (safeguards secrets)
+├── LICENSE                           # MIT License
+├── package.json
+└── tsconfig.json
+```
+
+---
+
+## 👨‍💻 Project Information & Hackathon Details
+
+<div align="center">
+
+| Attribute | Details |
+| :--- | :--- |
+| **Project** | **AI Co-Founder** — Autonomous Operations Partner |
+| **Author / Builder** | **Deven Goyal** ([@Devengoyal885](https://github.com/Devengoyal885)) |
+| **Track** | **AI SaaS Startup Track** |
+| **Hackathon** | [**HackIndia AI-First Startup Hackathon**](https://github.com/HackIndiaXYZ/ai-first-startup-hackathon-build-a-startup-using-ai-only-arclight) |
+| **Live App URL** | [**https://ai-cofounder-gilt.vercel.app/dashboard**](https://ai-cofounder-gilt.vercel.app/dashboard) |
+| **License** | [MIT License](LICENSE) |
+
+</div>
+
+---
+
+<div align="center">
+  <b>Built with ❤️ by Deven Goyal for founders everywhere.</b>
+</div>
