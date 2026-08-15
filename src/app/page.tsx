@@ -104,7 +104,7 @@ export default function LandingPage() {
 
       {/* Footer */}
       <div className="mt-16 text-center text-xs text-muted-foreground">
-        <p>Built with Next.js + Claude AI + Supabase</p>
+        <p>Built with Next.js + Google Gemini AI + Supabase</p>
         <p className="mt-1">Hackathon Project — AI SaaS Startup Track</p>
       </div>
     </div>

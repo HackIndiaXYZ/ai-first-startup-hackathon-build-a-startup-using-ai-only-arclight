@@ -41,7 +41,7 @@ flowchart TD
     end
 
     subgraph Infrastructure
-        F[🧠 Anthropic Claude API\nclaude-sonnet-4-6]
+        F[🧠 Google Gemini API\ngemini-2.5-flash]
         G[🗄️ Supabase\nAuth + Postgres]
     end
 
@@ -63,7 +63,7 @@ flowchart TD
 ## How It Works
 
 ### 🔍 Triage Agent
-Takes a batch of emails and classifies each into **Investor**, **Customer**, **Urgent/Deadline**, or **Noise**. For anything with a deadline or time-sensitive ask, it extracts the specific date and action into structured JSON and assigns a priority score (1-5). The full pipeline runs through Claude's API in a single batch call for efficiency. → [View prompt](docs/prompts/triage-agent.md)
+Takes a batch of emails and classifies each into **Investor**, **Customer**, **Urgent/Deadline**, or **Noise**. For anything with a deadline or time-sensitive ask, it extracts the specific date and action into structured JSON and assigns a priority score (1-5). The full pipeline runs through Google Gemini's API in a single batch call for efficiency. → [View prompt](docs/prompts/triage-agent.md)
 
 ### ✍️ Auto-Draft Agent
 For any flagged email, generates a suggested reply in the founder's voice with a configurable tone setting: **Direct** (concise, no-fluff), **Warm** (friendly, relationship-building), or **Formal** (polished, board-appropriate). The founder can edit the draft and mark it as "sent" — no real email sending required, this is a productivity workflow. → [View prompt](docs/prompts/draft-agent.md)
@@ -90,7 +90,7 @@ AI Co-Founder applies that same proven architecture to the founder-ops problem �
 |-------|-----------|
 | **Frontend + Backend** | Next.js 16 (App Router) + TypeScript |
 | **Styling** | Tailwind CSS v4 + shadcn/ui |
-| **AI** | Anthropic Claude API (`claude-sonnet-4-6`) |
+| **AI** | Google Gemini API (`gemini-2.5-flash`) |
 | **Database / Auth** | Supabase (Postgres + Auth) |
 | **Charts** | Recharts |
 | **Deployment** | Vercel |
@@ -101,12 +101,12 @@ AI Co-Founder applies that same proven architecture to the founder-ops problem �
 ## AI Usage Report
 
 ### Runtime AI (Production)
-- **Claude `claude-sonnet-4-6`** powers all three runtime agents (Triage, Draft, Weekly Update) via the Anthropic API
+- **Google Gemini `gemini-2.5-flash`** powers all three runtime agents (Triage, Draft, Weekly Update) via the Google Gen AI API
 - Each agent has a carefully crafted system prompt — see [`/docs/prompts/`](docs/prompts/)
 - The **Weekly Update Agent** was also used to help draft this hackathon's own pitch deck (it synthesizes real product activity into slide format)
 
 ### Development AI
-- **Antigravity (Claude)** was used for initial scaffolding, code generation, and deployment automation
+- **Antigravity** was used for initial scaffolding, code generation, and deployment automation
 - Estimated AI-generated code: **~80%** of boilerplate/scaffold, **~50%** of core business logic (agent prompts, classification rules, dashboard components)
 - All AI-generated code was reviewed and iteratively refined by the builder
 
@@ -141,14 +141,14 @@ ai-cofounder/
 │   │   ├── trend-chart.tsx           → Recharts trend visualization
 │   │   └── deadline-list.tsx         → Deadline countdown list
 │   └── lib/
-│       ├── agents/
-│       │   ├── triage.ts             → Triage Agent (classify, extract, prioritize)
-│       │   ├── draft.ts              → Auto-Draft Agent (tone-aware replies)
-│       │   └── weekly-update.ts      → Weekly Update Agent (email + slides)
-│       ├── data/
-│       │   └── seed-emails.json      → 18 realistic demo emails
-│       ├── types.ts                  → TypeScript type definitions
-│       └── utils.ts                  → Utility functions
+│   │   ├── agents/
+│   │   │   ├── triage.ts             → Triage Agent (classify, extract, prioritize)
+│   │   │   ├── draft.ts              → Auto-Draft Agent (tone-aware replies)
+│   │   │   └── weekly-update.ts      → Weekly Update Agent (email + slides)
+│   │   ├── data/
+│   │   │   └── seed-emails.json      → 18 realistic demo emails
+│   │   ├── types.ts                  → TypeScript type definitions
+│   │   └── utils.ts                  → Utility functions
 ├── docs/
 │   ├── prompts/
 │   │   ├── triage-agent.md           → Triage system prompt
@@ -169,7 +169,7 @@ ai-cofounder/
 ### Prerequisites
 - Node.js 18+
 - npm
-- Anthropic API key ([get one here](https://console.anthropic.com/))
+- Google Gemini API key ([get one on Google AI Studio](https://aistudio.google.com/))
 
 ### Steps
 
@@ -183,7 +183,7 @@ npm install
 
 # 3. Set up environment variables
 cp .env.example .env.local
-# Edit .env.local and add your ANTHROPIC_API_KEY
+# Edit .env.local and add your GEMINI_API_KEY
 
 # 4. Run the dev server
 npm run dev
@@ -191,7 +191,7 @@ npm run dev
 
 Open [http://localhost:3000](http://localhost:3000) and click **Launch Dashboard**.
 
-> **💡 Demo Mode works without any API key** — the app includes a rule-based fallback triage engine. Adding your Anthropic API key enables the full Claude-powered AI agents for more accurate classification and natural draft generation.
+> **💡 Demo Mode works without any API key** — the app includes a rule-based fallback triage engine. Adding your Gemini API key enables the full Gemini-powered AI agents for more accurate classification and natural draft generation.
 
 ---
 

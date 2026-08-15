@@ -1,4 +1,4 @@
-import Anthropic from '@anthropic-ai/sdk';
+import { GoogleGenAI } from '@google/genai';
 import { TriageResult, WeeklyUpdate, Slide } from '@/lib/types';
 
 const WEEKLY_UPDATE_SYSTEM_PROMPT = `You are an AI chief-of-staff helping an early-stage startup founder write their weekly investor update email and a mini pitch-style slide summary.
@@ -53,7 +53,7 @@ Return ONLY the JSON object, no other text.`;
 export async function generateWeeklyUpdate(
   triageResults: TriageResult[]
 ): Promise<WeeklyUpdate> {
-  const apiKey = process.env.ANTHROPIC_API_KEY;
+  const apiKey = process.env.GEMINI_API_KEY || process.env.GOOGLE_API_KEY;
 
   // Calculate week range
   const now = new Date();
@@ -61,11 +61,9 @@ export async function generateWeeklyUpdate(
   weekStart.setDate(now.getDate() - 7);
 
   if (!apiKey) {
-    console.warn('ANTHROPIC_API_KEY not set — using fallback weekly update');
+    console.warn('GEMINI_API_KEY not set — using fallback weekly update');
     return fallbackWeeklyUpdate(triageResults, weekStart, now);
   }
-
-  const client = new Anthropic({ apiKey });
 
   const triageSummary = triageResults.map(r => ({
     emailId: r.emailId,
@@ -80,19 +78,17 @@ export async function generateWeeklyUpdate(
   }));
 
   try {
-    const response = await client.messages.create({
-      model: 'claude-sonnet-4-6',
-      max_tokens: 4096,
-      system: WEEKLY_UPDATE_SYSTEM_PROMPT,
-      messages: [
-        {
-          role: 'user',
-          content: `Generate the weekly investor update and slide summary based on this week's triaged email activity:\n\nWeek: ${weekStart.toISOString().split('T')[0]} to ${now.toISOString().split('T')[0]}\n\nTriaged emails (${triageResults.length} total):\n${JSON.stringify(triageSummary, null, 2)}`,
-        },
-      ],
+    const ai = new GoogleGenAI({ apiKey });
+    const response = await ai.models.generateContent({
+      model: 'gemini-2.5-flash',
+      contents: `Generate the weekly investor update and slide summary based on this week's triaged email activity:\n\nWeek: ${weekStart.toISOString().split('T')[0]} to ${now.toISOString().split('T')[0]}\n\nTriaged emails (${triageResults.length} total):\n${JSON.stringify(triageSummary, null, 2)}`,
+      config: {
+        systemInstruction: WEEKLY_UPDATE_SYSTEM_PROMPT,
+        responseMimeType: 'application/json',
+      },
     });
 
-    const text = response.content[0].type === 'text' ? response.content[0].text : '';
+    const text = response.text || '';
 
     // Extract JSON from response
     const jsonMatch = text.match(/\{[\s\S]*\}/);

@@ -1,4 +1,4 @@
-import Anthropic from '@anthropic-ai/sdk';
+import { GoogleGenAI } from '@google/genai';
 import { Email, TriageResult, EmailCategory } from '@/lib/types';
 
 const TRIAGE_SYSTEM_PROMPT = `You are an AI chief-of-staff for an early-stage startup founder. Your job is to triage incoming emails and classify them by category and urgency.
@@ -38,14 +38,12 @@ Respond with a JSON array. Each element must have this exact structure:
 Return ONLY the JSON array, no other text.`;
 
 export async function triageEmails(emails: Email[]): Promise<TriageResult[]> {
-  const apiKey = process.env.ANTHROPIC_API_KEY;
+  const apiKey = process.env.GEMINI_API_KEY || process.env.GOOGLE_API_KEY;
   
   if (!apiKey) {
-    console.warn('ANTHROPIC_API_KEY not set — using fallback triage');
+    console.warn('GEMINI_API_KEY not set — using fallback triage');
     return fallbackTriage(emails);
   }
-
-  const client = new Anthropic({ apiKey });
 
   const emailSummaries = emails.map(e => ({
     id: e.id,
@@ -57,19 +55,17 @@ export async function triageEmails(emails: Email[]): Promise<TriageResult[]> {
   }));
 
   try {
-    const response = await client.messages.create({
-      model: 'claude-sonnet-4-6',
-      max_tokens: 4096,
-      system: TRIAGE_SYSTEM_PROMPT,
-      messages: [
-        {
-          role: 'user',
-          content: `Triage the following ${emails.length} emails:\n\n${JSON.stringify(emailSummaries, null, 2)}`,
-        },
-      ],
+    const ai = new GoogleGenAI({ apiKey });
+    const response = await ai.models.generateContent({
+      model: 'gemini-2.5-flash',
+      contents: `Triage the following ${emails.length} emails:\n\n${JSON.stringify(emailSummaries, null, 2)}`,
+      config: {
+        systemInstruction: TRIAGE_SYSTEM_PROMPT,
+        responseMimeType: 'application/json',
+      },
     });
 
-    const text = response.content[0].type === 'text' ? response.content[0].text : '';
+    const text = response.text || '';
     
     // Extract JSON from response (handle potential markdown code blocks)
     const jsonMatch = text.match(/\[[\s\S]*\]/);

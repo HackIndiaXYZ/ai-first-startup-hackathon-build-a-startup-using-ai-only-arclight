@@ -1,4 +1,4 @@
-import Anthropic from '@anthropic-ai/sdk';
+import { GoogleGenAI } from '@google/genai';
 import { Email, DraftResult } from '@/lib/types';
 
 const DRAFT_SYSTEM_PROMPT = `You are an AI writing assistant for an early-stage startup founder. Your job is to draft email replies in the founder's voice.
@@ -27,29 +27,24 @@ export async function generateDraft(
   email: Email,
   tone: 'direct' | 'warm' | 'formal'
 ): Promise<DraftResult> {
-  const apiKey = process.env.ANTHROPIC_API_KEY;
+  const apiKey = process.env.GEMINI_API_KEY || process.env.GOOGLE_API_KEY;
 
   if (!apiKey) {
-    console.warn('ANTHROPIC_API_KEY not set — using fallback draft');
+    console.warn('GEMINI_API_KEY not set — using fallback draft');
     return fallbackDraft(email, tone);
   }
 
-  const client = new Anthropic({ apiKey });
-
   try {
-    const response = await client.messages.create({
-      model: 'claude-sonnet-4-6',
-      max_tokens: 1024,
-      system: DRAFT_SYSTEM_PROMPT,
-      messages: [
-        {
-          role: 'user',
-          content: `Original email:\nFrom: ${email.from}\nSubject: ${email.subject}\nBody:\n${email.body}\n\nTone: ${tone}\n\nDraft a reply.`,
-        },
-      ],
+    const ai = new GoogleGenAI({ apiKey });
+    const response = await ai.models.generateContent({
+      model: 'gemini-2.5-flash',
+      contents: `Original email:\nFrom: ${email.from}\nSubject: ${email.subject}\nBody:\n${email.body}\n\nTone: ${tone}\n\nDraft a reply.`,
+      config: {
+        systemInstruction: DRAFT_SYSTEM_PROMPT,
+      },
     });
 
-    const text = response.content[0].type === 'text' ? response.content[0].text : '';
+    const text = response.text || '';
 
     return {
       triageId: email.id,
