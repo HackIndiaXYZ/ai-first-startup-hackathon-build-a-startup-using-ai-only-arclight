@@ -1,0 +1,197 @@
+/* â”€â”€â”€ Shared Hub Architecture Styles â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+/* Used by PreparationHubPage, JobsHubPage, CareerHubPage, CommunityHubPage  */
+
+.hub-page {
+    min-height: 100vh;
+    background: #f8fafc;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+/* Layout: Sidebar + Main side by side */
+.hub-layout {
+    display: flex;
+    min-height: 100vh;
+    padding-top: var(--navbar-height, 72px);
+    position: relative;
+    z-index: 1;
+}
+
+/* â”€â”€â”€ Sidebar â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+.hub-sidebar {
+    width: 240px;
+    flex-shrink: 0;
+    border-right: 1px solid rgba(0, 0, 0, 0.06);
+    background: #ffffff;
+    display: flex;
+    flex-direction: column;
+    position: sticky;
+    top: var(--navbar-height, 72px);
+    height: calc(100vh - var(--navbar-height, 72px));
+    overflow-y: auto;
+}
+
+.hub-sidebar-header {
+    padding: 20px 16px 8px;
+}
+
+.hub-sidebar-label {
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    color: #94a3b8;
+    margin: 0;
+}
+
+.hub-sidebar-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    padding: 8px;
+}
+
+.hub-sidebar-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 12px;
+    border-radius: 10px;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    text-align: left;
+    transition: background 0.15s ease, color 0.15s ease;
+    width: 100%;
+    position: relative;
+}
+
+.hub-sidebar-item:hover {
+    background: #f1f5f9;
+}
+
+.hub-sidebar-item.active {
+    background: #eff6ff;
+}
+
+.hub-sidebar-icon-wrap {
+    width: 30px;
+    height: 30px;
+    border-radius: 8px;
+    background: #f1f5f9;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #64748b;
+    flex-shrink: 0;
+    transition: background 0.15s, color 0.15s;
+}
+
+.hub-sidebar-item.active .hub-sidebar-icon-wrap {
+    background: #dbeafe;
+    color: #2563eb;
+}
+
+.hub-sidebar-item-text {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+    flex: 1;
+    min-width: 0;
+}
+
+.hub-sidebar-item-label {
+    font-size: 0.84rem;
+    font-weight: 600;
+    color: #475569;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.hub-sidebar-item.active .hub-sidebar-item-label {
+    color: #1d4ed8;
+}
+
+.hub-sidebar-item-desc {
+    font-size: 0.72rem;
+    color: #94a3b8;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.hub-sidebar-arrow {
+    color: #93c5fd;
+    flex-shrink: 0;
+}
+
+/* â”€â”€â”€ Main Content Area â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+.hub-main {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.hub-breadcrumb {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 12px 28px;
+    font-size: 0.78rem;
+    color: #94a3b8;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    background: #ffffff;
+}
+
+.hub-breadcrumb span:first-child {
+    color: #64748b;
+    font-weight: 500;
+}
+
+.hub-breadcrumb-active {
+    color: #1e293b !important;
+    font-weight: 600 !important;
+}
+
+.hub-content {
+    flex: 1;
+    overflow-y: auto;
+    height: calc(100vh - var(--navbar-height, 72px) - 41px);
+}
+
+/* Ensure embedded pages don't add their own nav padding */
+.hub-content .asmt-page,
+.hub-content .prac-page,
+.hub-content .casestudy-page,
+.hub-content .gd-page,
+.hub-content .comm-page,
+.hub-content .opp-page,
+.hub-content .app-track-page,
+.hub-content .pd-page,
+.hub-content .offcampus-page,
+.hub-content .forum-page,
+.hub-content .events-page {
+    background: transparent !important;
+    min-height: 0 !important;
+}
+
+.hub-content .asmt-main,
+.hub-content .gd-main {
+    padding-top: 0 !important;
+}
+
+.hub-content .opp-main {
+    padding-top: var(--space-8) !important;
+}
+
+.hub-content .app-track-main {
+    padding-top: var(--space-8) !important;
+}
+
+/* Old prep-hub classes kept for backwards compat */
+.prep-hub-page { display: none; }
+
+
+.hub-content > div { background: transparent !important; }
+.hub-content > div::before { display: none !important; }

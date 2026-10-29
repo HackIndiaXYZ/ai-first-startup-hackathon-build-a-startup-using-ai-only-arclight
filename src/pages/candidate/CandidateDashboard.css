@@ -1,0 +1,844 @@
+﻿/* ==========================================================================
+   CANDIDATE DASHBOARD â€” PREMIUM EDITORIAL THEME (Phase 1)
+   Crisp Material Depth, Optical Sizing, Filmic Textures
+   ========================================================================== */
+
+/* â”€â”€â”€ BASE â”€â”€â”€ */
+.c-dash {
+    min-height: 100vh;
+    background: #F8FAFC;
+    position: relative;
+    overflow: hidden;
+    font-family: var(--font-sans);
+    color: #0F172A;
+}
+
+/* â”€â”€â”€ AMBIENT BACKGROUND â”€â”€â”€ */
+.c-dash-bg {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    overflow: hidden;
+    /* Noise texture overlay */
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.03'/%3E%3C/svg%3E");
+}
+
+/* Ambient glowing orbs - Pushed back, softened, lower opacity */
+.c-dash-orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(150px);
+    opacity: 0.25; /* Significantly reduced */
+    animation: float-ambient 30s ease-in-out infinite alternate;
+}
+
+.c-dash-orb--1 {
+    width: 800px;
+    height: 800px;
+    background: rgba(37, 99, 235, 0.2); /* Deep Blue */
+    top: -200px;
+    left: -200px;
+}
+
+.c-dash-orb--2 {
+    width: 1000px;
+    height: 1000px;
+    background: rgba(167, 139, 250, 0.15); /* Soft Purple */
+    bottom: -300px;
+    right: -300px;
+    animation-delay: -15s;
+}
+
+.c-dash-orb--3 {
+    width: 600px;
+    height: 600px;
+    background: rgba(16, 185, 129, 0.15); /* Emerald */
+    top: 30%;
+    left: 40%;
+    animation-delay: -7s;
+}
+
+@keyframes float-ambient {
+    0% { transform: translate(0, 0) scale(1); }
+    100% { transform: translate(60px, -60px) scale(1.05); }
+}
+
+/* â”€â”€â”€ LAYOUT â”€â”€â”€ */
+.c-dash-main {
+    position: relative;
+    z-index: 1;
+    padding: calc(var(--navbar-height, 60px) + 60px) 40px 80px;
+    max-width: 1500px;
+    margin: 0 auto;
+}
+
+.c-dash-grid-layout {
+    display: grid;
+    grid-template-columns: 320px 1fr;
+    gap: 64px; /* Increased gap for breathing room */
+    align-items: start;
+}
+
+/* â”€â”€â”€ LEFT SIDEBAR (IDENTITY RAIL) â”€â”€â”€ */
+.c-dash-sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+    position: sticky;
+    top: calc(var(--navbar-height, 60px) + 40px);
+}
+
+.c-dash-greeting {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 8px;
+}
+
+.c-dash-time-label {
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    color: #64748B;
+    text-transform: uppercase;
+    font-family: var(--font-sans);
+}
+
+.c-dash-name {
+    font-family: var(--font-serif);
+    font-size: 3.5rem;
+    font-weight: 400;
+    color: #0F172A;
+    letter-spacing: -0.04em; /* Tight tracking for large text */
+    line-height: 1;
+    margin: 0;
+}
+
+/* â”€â”€â”€ INLINE IMAGE TYPOGRAPHY & MICRO-LOOPS â”€â”€â”€ */
+.c-dash-inline-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 12px;
+    background: #0F172A;
+    color: #FFFFFF;
+    border-radius: 9999px;
+    font-family: var(--font-sans);
+    font-size: 0.9rem;
+    font-weight: 600;
+    vertical-align: middle;
+    margin: 0 8px;
+    letter-spacing: 0;
+}
+
+.c-dash-pulse-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #10B981;
+    box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
+    animation: pulse-dot 2s infinite cubic-bezier(0.66, 0, 0, 1);
+}
+
+@keyframes pulse-dot {
+    to {
+        box-shadow: 0 0 0 10px rgba(16, 185, 129, 0);
+    }
+}
+
+/* â”€â”€â”€ NOISE OVERLAY â”€â”€â”€ */
+.c-dash-noise-overlay {
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+    opacity: 0.03;
+    pointer-events: none;
+    z-index: 1;
+}
+
+/* â”€â”€â”€ SOLID MATERIAL UTILITY (Replacing Muddy Glass) â”€â”€â”€ */
+.solid-panel {
+    background: #FFFFFF;
+    border-radius: 16px;
+    box-shadow: 0 0 0 1px rgba(15, 23, 42, 0.04), 0 4px 6px -1px rgba(0, 0, 0, 0.02);
+}
+
+/* â”€â”€â”€ AGENCY DOUBLE BEZEL (DOPPELRAND) â”€â”€â”€ */
+.agency-outer {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 8px;
+    border-radius: 2rem;
+    margin-bottom: 24px;
+}
+body[data-theme="light"] .agency-outer {
+    background: rgba(0, 0, 0, 0.03);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.agency-inner {
+    background: #0f1117;
+    box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.15);
+    border-radius: calc(2rem - 8px);
+    padding: 32px;
+}
+body[data-theme="light"] .agency-inner {
+    background: #ffffff;
+    box-shadow: inset 0 1px 1px rgba(255, 255, 255, 1);
+}
+
+/* â”€â”€â”€ IDENTITY ACTIONS â”€â”€â”€ */
+.c-dash-identity-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.id-capsule-btn {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    /* Nested wrapper look for buttons */
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 100px; /* Fully rounded pill */
+    padding: 16px 24px;
+    text-decoration: none;
+    cursor: pointer;
+    color: #f8fafc;
+    /* Apple Spring Physics */
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), background 0.2s ease;
+}
+body[data-theme="light"] .id-capsule-btn {
+    background: #ffffff;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    color: #0f172a;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.02);
+}
+
+.id-capsule-btn:hover {
+    /* GPU layer only */
+    box-shadow: 0 0 0 1px rgba(15, 23, 42, 0.06), 0 12px 24px -4px rgba(0,0,0,0.06);
+}
+
+.id-capsule-btn:active {
+    transform: scale(0.98);
+}
+
+.id-capsule-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #0F172A;
+}
+
+.id-capsule-text {
+    flex: 1;
+    text-align: left;
+    margin-left: 14px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #0F172A;
+}
+
+.id-capsule-action {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #94A3B8;
+    transition: color 200ms;
+}
+
+.id-capsule-btn:hover .id-capsule-action { color: #0F172A; }
+
+/* â”€â”€â”€ CAPABILITY MATRIX â”€â”€â”€ */
+.id-capsule-matrix {
+    padding: 24px;
+    background: #FFFFFF;
+    border-radius: 16px;
+    box-shadow: 0 0 0 1px rgba(15, 23, 42, 0.04), 0 8px 24px -4px rgba(0, 0, 0, 0.04);
+}
+
+.id-matrix-header {
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    color: #64748B;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+}
+
+.id-matrix-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.id-matrix-row {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.id-matrix-row-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.id-matrix-skill-name {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #0F172A;
+}
+
+.id-matrix-top-badge {
+    font-size: 0.6rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    color: #2563EB;
+    background: rgba(37, 99, 235, 0.08);
+    padding: 4px 8px;
+    border-radius: 6px;
+}
+
+.id-matrix-progress-container {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.id-matrix-progress-rail {
+    flex: 1;
+    height: 4px;
+    background: #F1F5F9;
+    border-radius: 99px;
+    overflow: hidden;
+}
+
+.id-matrix-progress-fill {
+    height: 100%;
+    background: #0F172A; /* Solid, premium color instead of gradient */
+    border-radius: 99px;
+    transition: width 1s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.id-matrix-score {
+    font-family: var(--font-serif);
+    font-size: 1.1rem;
+    color: #0F172A;
+    min-width: 36px;
+    text-align: right;
+    line-height: 1;
+}
+
+/* â”€â”€â”€ GAP LOOP â”€â”€â”€ */
+.c-dash-gap-loop {
+    padding: 24px;
+    background: #FFFFFF;
+    border-radius: 16px;
+    box-shadow: 0 0 0 1px rgba(15, 23, 42, 0.04), 0 8px 24px -4px rgba(0, 0, 0, 0.04);
+}
+
+.c-dash-gap-loop-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    color: #64748B;
+    text-transform: uppercase;
+}
+
+.c-dash-gap-loop-header svg { color: #0F172A; }
+
+.c-dash-gap-subtitle {
+    font-size: 0.85rem;
+    color: #475569;
+    margin: 12px 0 20px;
+    line-height: 1.5;
+}
+
+.c-dash-gap-item {
+    background: #F8FAFC;
+    border-radius: 12px;
+    padding: 16px;
+    margin-bottom: 12px;
+    box-shadow: inset 0 0 0 1px rgba(15, 23, 42, 0.04);
+}
+
+.c-dash-gap-item:last-child { margin-bottom: 0; }
+
+.c-dash-gap-item-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+}
+
+.c-dash-gap-skill {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #0F172A;
+}
+
+.c-dash-gap-score {
+    font-family: var(--font-serif);
+    font-size: 1.25rem;
+}
+
+.c-dash-gap-actions {
+    display: flex;
+    gap: 8px;
+}
+
+.c-dash-gap-link {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    padding: 10px 0;
+    border-radius: 8px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-decoration: none;
+    /* Apple Spring Physics: Instant down, spring up */
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.2s;
+}
+
+.c-dash-gap-link:active { 
+    transform: scale(0.96); 
+    transition: transform 100ms ease-out; /* instant drop on click */
+}
+
+/* â”€â”€â”€ MAIN CONTENT â”€â”€â”€ */
+.c-dash-content {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    min-width: 0;
+}
+
+/* Segmented Control */
+.c-dash-tabs {
+    display: inline-flex;
+    gap: 4px;
+    background: #E2E8F0;
+    padding: 4px;
+    border-radius: 12px;
+    align-self: flex-start;
+}
+
+.c-dash-tab {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 24px;
+    background: transparent;
+    border: none;
+    border-radius: 10px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #475569;
+    cursor: pointer;
+    /* Apple Design: No heavy CSS transitions for hover, just color */
+    transition: color 150ms ease;
+}
+
+.c-dash-tab-pill {
+    position: absolute;
+    inset: 0;
+    background: #FFFFFF;
+    border-radius: 10px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    z-index: 1;
+}
+
+.c-dash-tab:hover:not(.active) { color: #0F172A; }
+.c-dash-tab:active {
+    transform: scale(0.97);
+    transition: transform 100ms ease-out; /* instant feedback */
+}
+
+.c-dash-tab.active {
+    background: transparent;
+    color: #0F172A;
+    box-shadow: none;
+}
+
+/* Showcase (Trusted By) */
+.c-company-showcase {
+    padding: 24px;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 32px;
+    background: #FFFFFF;
+    border-radius: 16px;
+    box-shadow: 0 0 0 1px rgba(15, 23, 42, 0.04), 0 4px 12px rgba(0,0,0,0.02);
+    overflow: hidden;
+    position: relative;
+}
+
+.c-company-marquee-viewport {
+    flex-grow: 1;
+    overflow: hidden;
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.c-company-marquee-viewport::before,
+.c-company-marquee-viewport::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 60px;
+    z-index: 2;
+    pointer-events: none;
+}
+.c-company-marquee-viewport::before {
+    left: 0;
+    background: linear-gradient(to right, #FFFFFF 0%, transparent 100%);
+}
+.c-company-marquee-viewport::after {
+    right: 0;
+    background: linear-gradient(to left, #FFFFFF 0%, transparent 100%);
+}
+
+.c-company-showcase-title {
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: #64748B;
+    white-space: nowrap;
+    position: relative;
+    z-index: 3;
+    padding-right: 24px;
+    border-right: 1px solid rgba(15, 23, 42, 0.1);
+    flex-shrink: 0;
+}
+
+.c-company-logos-track {
+    display: flex;
+    align-items: center;
+    gap: 48px;
+    width: max-content;
+    animation: marquee 30s linear infinite;
+}
+.c-company-logos-track:hover { animation-play-state: paused; }
+
+@keyframes marquee {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+}
+
+.c-company-logo-wrapper {
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    filter: grayscale(100%) opacity(0.6);
+    transition: filter 300ms ease;
+    cursor: pointer;
+}
+.c-company-logo-wrapper:hover { filter: grayscale(0%) opacity(1); }
+.c-company-logo-wrapper img { max-height: 24px; max-width: 100px; object-fit: contain; }
+
+/* Feed Title */
+.c-dash-section-title {
+    font-family: var(--font-serif);
+    font-size: 2.25rem;
+    font-weight: 400;
+    color: #0F172A;
+    margin-bottom: 24px;
+    letter-spacing: -0.03em;
+}
+
+/* â”€â”€â”€ JOB CARDS (SOLID MATERIAL / BENTO GRID) â”€â”€â”€ */
+.c-job-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 24px;
+}
+
+/* Asymmetric Bento layout: First card spans full width */
+.c-job-card-premium:nth-child(1) {
+    grid-column: 1 / -1;
+}
+
+.c-job-card-premium {
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    background: #FFFFFF;
+    border-radius: 20px;
+    box-shadow: 0 0 0 1px rgba(15, 23, 42, 0.04), 0 4px 6px -1px rgba(0, 0, 0, 0.02);
+    /* No CSS transform transitions - let framer-motion handle spring */
+    transition: box-shadow 300ms ease;
+    overflow: hidden;
+    position: relative;
+    cursor: pointer;
+}
+
+.c-job-card-premium:active {
+    /* Hard active scale down */
+    transform: scale(0.98) !important;
+    transition: transform 100ms ease-out !important;
+}
+
+.c-job-card-premium:hover {
+    box-shadow: 0 0 0 1px rgba(15, 23, 42, 0.06), 0 20px 40px -8px rgba(0, 0, 0, 0.08);
+}
+
+.c-job-header-premium,
+.c-job-details-premium,
+.c-job-footer-premium {
+    padding: 0 32px;
+}
+
+.c-job-header-premium {
+    display: flex;
+    gap: 24px;
+    align-items: flex-start;
+    padding-top: 32px;
+    margin-bottom: 24px;
+}
+
+.c-job-logo-wrapper {
+    width: 56px;
+    height: 56px;
+    border-radius: 12px;
+    background: #F8FAFC;
+    border: 1px solid rgba(15, 23, 42, 0.04);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    overflow: hidden;
+}
+.c-job-logo-wrapper img { width: 100%; height: 100%; object-fit: cover; }
+.c-job-logo-wrapper svg { color: #64748B; }
+
+.c-job-header-info {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.c-job-title-premium {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #0F172A;
+    line-height: 1.2;
+    letter-spacing: -0.01em;
+}
+
+.c-job-company-premium {
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: #475569;
+}
+
+.c-job-details-premium {
+    display: flex;
+    flex-wrap: wrap;
+    column-gap: 24px;
+    row-gap: 12px;
+    font-size: 0.85rem;
+    color: #64748B;
+    padding-bottom: 24px;
+}
+
+.c-job-details-premium span {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-weight: 500;
+}
+
+.c-job-skills-premium {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    padding: 0 32px 24px 32px;
+    border-bottom: 1px solid rgba(15, 23, 42, 0.06);
+}
+
+.c-job-signal-chip {
+    background: #F1F5F9;
+    border-radius: 6px;
+    padding: 6px 10px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: #475569;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.c-job-signal-chip.verified {
+    background: #F0FDF4;
+    color: #16A34A;
+}
+
+.c-job-signal-check {
+    font-size: 0.75rem;
+    font-weight: 800;
+}
+
+/* â”€â”€â”€ FOOTER & ACTIONS â”€â”€â”€ */
+.c-job-footer-premium {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 20px;
+    padding-bottom: 24px;
+    margin-top: auto;
+    background: #FAFAFA;
+}
+
+/* Premium Badge Glow */
+.c-job-match-badge-premium span {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    padding: 6px 12px;
+    border-radius: 8px;
+    /* We inject bg color dynamically in JS, but setup structure here */
+}
+
+.c-job-actions-premium {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.c-job-btn-text {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #64748B;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    transition: color 200ms;
+}
+.c-job-btn-text:hover { color: #0F172A; }
+
+.c-job-btn-primary {
+    background: #0F172A;
+    color: #FFFFFF;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 10px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(15, 23, 42, 0.15);
+    /* Apple Spring Physics */
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s ease;
+}
+
+.c-job-btn-primary:hover { 
+    box-shadow: 0 8px 24px rgba(15, 23, 42, 0.25);
+}
+.c-job-btn-primary:active { 
+    transform: scale(0.97); 
+    transition: transform 100ms ease-out; /* instant feedback */
+}
+
+/* Empty states */
+.c-dash-empty {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    padding: 80px 24px;
+    color: #64748B;
+    font-size: 0.95rem;
+    text-align: center;
+    background: #FFFFFF;
+    border: 1px dashed rgba(15, 23, 42, 0.1);
+    border-radius: 16px;
+}
+.c-dash-empty a { color: #0F172A; font-weight: 600; text-decoration: underline; text-underline-offset: 4px;}
+.c-dash-view-all {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 16px;
+    color: #0F172A;
+    font-size: 0.95rem;
+    font-weight: 600;
+    text-decoration: none;
+    /* Apple Design: Simple opacity fade, no heavy translating on hover */
+    transition: opacity 200ms ease, transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.c-dash-view-all:hover { opacity: 0.7; }
+.c-dash-view-all:active {
+    transform: scale(0.98);
+    transition: transform 100ms ease-out; /* instant feedback */
+}
+
+.spin { animation: dash-spin 1s linear infinite; }
+@keyframes dash-spin { to { transform: rotate(360deg); } }
+
+/* â”€â”€â”€ REDUCED MOTION (Apple Design Compliance) â”€â”€â”€ */
+@media (prefers-reduced-motion: reduce) {
+    .c-job-card-premium,
+    .c-dash-gap-link,
+    .c-dash-tab,
+    .c-job-btn-primary,
+    .id-capsule-btn {
+        transition: opacity 200ms ease, background 200ms ease, box-shadow 200ms ease !important;
+        transform: none !important;
+    }
+    
+    .c-company-logos-track {
+        animation: none !important;
+    }
+}
+/* Responsive */
+@media (max-width: 1024px) {
+    .c-dash-grid-layout { grid-template-columns: 1fr; }
+    .c-dash-sidebar { position: relative; top: 0; }
+}
+@media (max-width: 768px) {
+    .c-dash-main { padding: 100px 20px 40px; }
+}
+/* --- Page-mount orchestration — Dashboard sections cascade in --- */
+.c-dash-sidebar {
+    animation: fadeInUp 280ms cubic-bezier(0.23, 1, 0.32, 1) both;
+    animation-delay: 0ms;
+}
+.c-dash-content {
+    animation: fadeInUp 280ms cubic-bezier(0.23, 1, 0.32, 1) both;
+    animation-delay: 60ms;
+}
+.c-dash-greeting {
+    animation: fadeInUp 220ms cubic-bezier(0.23, 1, 0.32, 1) both;
+    animation-delay: 20ms;
+}
+
+/* --- Global focus ring (keyboard accessibility — Emil: required) --- */
+:focus-visible {
+    outline: 2px solid #2563eb;
+    outline-offset: 3px;
+    border-radius: 4px;
+}

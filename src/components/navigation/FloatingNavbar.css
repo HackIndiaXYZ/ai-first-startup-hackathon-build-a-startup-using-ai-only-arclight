@@ -1,0 +1,481 @@
+/* â”€â”€â”€ Floating Navbar â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+
+.floating-navbar {
+    position: fixed;
+    top: 16px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: var(--z-float, 1000);
+    width: calc(100% - 32px);
+    max-width: 1120px;
+}
+
+/* â”€â”€ Premium glass inner container â”€â”€ */
+.navbar-inner {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 14px;
+
+    /* Deep frosted glass */
+    background: rgba(255, 255, 255, 0.72);
+    backdrop-filter: blur(40px) saturate(180%);
+    -webkit-backdrop-filter: blur(40px) saturate(180%);
+
+    /* Layered border: bright top edge + subtle outer rim */
+    border: 1px solid rgba(255, 255, 255, 0.75);
+    border-top-color: rgba(255, 255, 255, 0.92);
+
+    border-radius: 99px;
+
+    /* Elevation: soft ambient + crisp drop */
+    box-shadow:
+        0 0 0 1px rgba(0, 0, 0, 0.04),
+        0 4px 6px -1px rgba(0, 0, 0, 0.06),
+        0 12px 32px -4px rgba(0, 0, 0, 0.10),
+        0 24px 48px -8px rgba(0, 0, 0, 0.06),
+        inset 0 1px 0 rgba(255, 255, 255, 0.96),
+        inset 0 -1px 0 rgba(0, 0, 0, 0.04);
+
+    /* Smooth entry â€” specify exact properties, never 'all' */
+    transition: box-shadow var(--duration-normal) var(--ease-out),
+                background var(--duration-normal) var(--ease-out);
+}
+
+/* Subtle hover â€” lifts a touch more */
+.floating-navbar:hover .navbar-inner {
+    background: rgba(255, 255, 255, 0.82);
+    box-shadow:
+        0 0 0 1px rgba(0, 0, 0, 0.05),
+        0 6px 12px -2px rgba(0, 0, 0, 0.08),
+        0 20px 48px -6px rgba(0, 0, 0, 0.12),
+        0 32px 64px -12px rgba(0, 0, 0, 0.08),
+        inset 0 1px 0 rgba(255, 255, 255, 1),
+        inset 0 -1px 0 rgba(0, 0, 0, 0.03);
+}
+
+/* â”€â”€ Employer & institution variants â€” slightly warmer glass â”€â”€ */
+.floating-navbar--employer .navbar-inner,
+.floating-navbar--institution .navbar-inner {
+    background: rgba(250, 251, 253, 0.76);
+    border-color: rgba(220, 228, 240, 0.6);
+    border-top-color: rgba(255, 255, 255, 0.92);
+}
+
+/* â”€â”€ Academician / faculty variant â”€â”€ */
+.floating-navbar--academician .navbar-inner {
+    background: rgba(248, 250, 255, 0.76);
+}
+
+/* â”€â”€â”€ Logo â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+.navbar-logo {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    flex-shrink: 0;
+    text-decoration: none;
+}
+
+.navbar-logo-mark {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    background: var(--color-ink-900);
+    color: white;
+    border-radius: var(--radius-md);
+    font-size: var(--text-xs);
+    font-weight: var(--weight-black);
+    letter-spacing: -0.02em;
+    flex-shrink: 0;
+}
+
+.navbar-logo-text {
+    font-size: var(--text-sm);
+    font-weight: var(--weight-bold);
+    color: var(--color-ink-900);
+    letter-spacing: var(--tracking-tight);
+}
+
+.capable-logo {
+    height: 24px;
+    width: auto;
+    object-fit: contain;
+}
+
+.navbar-logo-q {
+    color: var(--color-electric);
+}
+
+/* â”€â”€â”€ Nav Links â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+.navbar-links {
+    display: flex;
+    align-items: center;
+    gap: 1px;
+    flex: 1;
+    justify-content: center;
+}
+
+.navbar-link {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: var(--space-1);
+    padding: 6px 10px;
+    font-size: 0.78rem;
+    font-weight: 500;
+    color: rgba(15, 23, 42, 0.55);
+    border-radius: 99px;
+    text-decoration: none;
+    /* ease-out: instant feedback on first movement, 150ms â€” Emil fast range */
+    transition: color var(--duration-fast) var(--ease-out),
+                background var(--duration-fast) var(--ease-out);
+    white-space: nowrap;
+}
+
+.navbar-link:hover {
+    color: rgba(15, 23, 42, 0.9);
+}
+
+.navbar-link--active {
+    color: rgba(15, 23, 42, 0.95);
+    font-weight: 600;
+}
+
+/* â”€â”€ Moving glass pill behind active link â”€â”€ */
+.navbar-active-pill {
+    position: absolute;
+    inset: 0;
+    border-radius: 99px;
+
+    /* Frosted glass pill */
+    background: rgba(255, 255, 255, 0.72);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.88);
+    border-top-color: rgba(255, 255, 255, 0.98);
+
+    box-shadow:
+        0 1px 3px rgba(0, 0, 0, 0.06),
+        0 2px 8px rgba(0, 0, 0, 0.04),
+        inset 0 1px 0 rgba(255, 255, 255, 0.95);
+
+    z-index: -1;
+}
+
+/* Active dot */
+.navbar-link-dot {
+    position: absolute;
+    bottom: 3px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 3px;
+    height: 3px;
+    background: var(--color-electric, #2563eb);
+    border-radius: 99px;
+}
+
+.navbar-link-text {
+    position: relative;
+    z-index: 1;
+}
+
+/* â”€â”€â”€ Dropdown â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+.navbar-item-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.navbar-dropdown {
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%) translateY(8px) scale(0.96);
+    padding-top: 12px;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    /* Explicit props only. ease-out so it snaps open fast */
+    transition:
+        opacity 180ms cubic-bezier(0.23, 1, 0.32, 1),
+        transform 180ms cubic-bezier(0.23, 1, 0.32, 1),
+        visibility 180ms cubic-bezier(0.23, 1, 0.32, 1);
+    /* Origin-aware: scale from the trigger above it */
+    transform-origin: top center;
+    z-index: 100;
+}
+
+.navbar-item-container:hover .navbar-dropdown {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transform: translateX(-50%) translateY(0) scale(1);
+}
+
+.navbar-dropdown-inner {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    border-radius: 16px;
+    padding: 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    min-width: 180px;
+    box-shadow: 
+        0 10px 25px -5px rgba(0, 0, 0, 0.1),
+        0 8px 10px -6px rgba(0, 0, 0, 0.1);
+}
+
+.navbar-dropdown-item {
+    padding: 8px 12px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: #475569;
+    text-decoration: none;
+    border-radius: 8px;
+    /* Explicit GPU props â€” never 'all' */
+    transition:
+        background 150ms cubic-bezier(0.23, 1, 0.32, 1),
+        color 150ms cubic-bezier(0.23, 1, 0.32, 1);
+    white-space: nowrap;
+}
+
+.navbar-dropdown-item:hover {
+    background: #f1f5f9;
+    color: #0f172a;
+}
+
+.navbar-dropdown-item.active {
+    background: #eff6ff;
+    color: #2563eb;
+    font-weight: 600;
+}
+
+/* â”€â”€â”€ Right Action â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+.navbar-action {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-shrink: 0;
+}
+
+.navbar-search-hint {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(15, 23, 42, 0.04);
+    border: 1px solid rgba(15, 23, 42, 0.08);
+    border-radius: 99px;
+    padding: 6px 12px;
+    color: rgba(15, 23, 42, 0.6);
+    font-size: 0.75rem;
+    font-weight: 500;
+    cursor: pointer;
+    /* Explicit GPU-only transition â€” never 'all' */
+    transition:
+        background 150ms cubic-bezier(0.23, 1, 0.32, 1),
+        color 150ms cubic-bezier(0.23, 1, 0.32, 1),
+        transform 80ms cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.navbar-search-hint:hover {
+    background: rgba(15, 23, 42, 0.08);
+    color: rgba(15, 23, 42, 0.9);
+}
+
+/* Link wrapper for LiquidMetalButton */
+.navbar-cta-link {
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+}
+
+/* Profile button (candidate variant) */
+.navbar-profile-btn {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    padding: 6px 14px;
+    background: rgba(15, 23, 42, 0.9);
+    color: white;
+    border-radius: 99px;
+    font-size: 0.815rem;
+    font-weight: 500;
+    text-decoration: none;
+    /* scale instead of translateY â€” GPU composited, no layout trigger */
+    transition: opacity var(--duration-fast) var(--ease-out),
+                transform var(--duration-fast) var(--ease-out);
+    white-space: nowrap;
+}
+
+.navbar-profile-btn:hover {
+    opacity: 0.88;
+    transform: scale(1.02);
+}
+
+.navbar-profile-btn:active {
+    transform: scale(0.97);
+}
+
+/* Legacy â€” kept for backward compat, now overridden by LiquidMetalButton */
+.navbar-console-btn {
+    background: var(--color-electric, #2563eb);
+}
+
+.navbar-avatar {
+    width: 20px;
+    height: 20px;
+    background: var(--color-electric, #2563eb);
+    border-radius: 99px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 8px;
+    font-weight: 700;
+    color: white;
+    flex-shrink: 0;
+}
+
+/* â”€â”€â”€ Responsive â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+@media (max-width: 1024px) {
+    .floating-navbar {
+        width: calc(100% - 24px);
+        max-width: 1120px;
+    }
+}
+
+@media (max-width: 768px) {
+    .floating-navbar {
+        top: 12px;
+        width: calc(100% - 24px);
+    }
+
+    .navbar-links {
+        display: none;
+    }
+
+    .navbar-inner {
+        justify-content: space-between;
+        padding: 10px 16px;
+    }
+}
+
+/* â”€â”€â”€ Reduced motion â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+@media (prefers-reduced-motion: reduce) {
+    .navbar-inner,
+    .navbar-active-pill,
+    .navbar-link,
+    .navbar-profile-btn {
+        transition: none !important;
+    }
+}
+.navbar-dropdown-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.navbar-dropdown {
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%) translateY(10px);
+    background: rgba(15, 23, 42, 0.95);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 16px;
+    padding: 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    min-width: 220px;
+    opacity: 0;
+    visibility: hidden;
+    /* ease-out, 200ms â€” enters fast so it feels responsive */
+    transition: opacity var(--duration-fast) var(--ease-out),
+                visibility var(--duration-fast) var(--ease-out),
+                transform var(--duration-fast) var(--ease-out);
+    /* Origin: scale from top center where the trigger is */
+    transform-origin: top center;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    z-index: 100;
+}
+
+.navbar-dropdown-wrapper:hover .navbar-dropdown {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(-50%) translateY(5px) scale(1);
+}
+
+.navbar-dropdown-item {
+    padding: 10px 16px;
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 500;
+    border-radius: 8px;
+    /* Specify exact properties â€” never 'all' */
+    transition: background var(--duration-fast) var(--ease-out),
+                color var(--duration-fast) var(--ease-out);
+    white-space: nowrap;
+}
+
+.navbar-dropdown-item:hover,
+.navbar-dropdown-item.active {
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+}
+
+/* â”€â”€â”€ Mobile Bottom Navigation â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+@media (max-width: 768px) {
+    .floating-navbar {
+        top: auto;
+        bottom: 24px;
+        left: 50%;
+        transform: translateX(-50%) translateY(0) !important;
+        width: calc(100% - 32px);
+    }
+    
+    .navbar-inner {
+        flex-direction: row;
+        justify-content: space-between;
+        padding: 8px 12px;
+        border-radius: 20px;
+    }
+    
+    .navbar-logo {
+        display: none; /* Hide logo on mobile to make room for tabs */
+    }
+
+    .navbar-links {
+        display: flex;
+        justify-content: space-around;
+        width: 100%;
+        gap: 0;
+        flex: 1;
+    }
+
+    .navbar-link {
+        flex-direction: column;
+        font-size: 11px;
+        padding: 6px 10px;
+        gap: 2px;
+    }
+
+    .navbar-link-text {
+        display: block;
+    }
+    
+    .navbar-right-actions {
+        display: none; /* Hide profile/theme actions in bottom nav, they should move to a hamburger menu or profile tab */
+    }
+
+    .mobile-only {
+        display: block !important;
+    }
+}

@@ -1,0 +1,139 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Only authenticated users can read/write their own profile
+    match /profiles/{uid} {
+      allow read: if true; // Public profiles are allowed, but could restrict later
+      allow write: if request.auth != null && request.auth.uid == uid.split('_')[0];
+    }
+    
+    // Allow collection group queries on 'profile' for getCandidatesByInstitution etc.
+    match /{path=**}/profile/{docId} {
+      allow read: if request.auth != null;
+    }
+
+    // Allow users to access their own notifications
+    match /notifications/{uid} {
+      allow read, write: if request.auth != null && request.auth.uid == uid.split('_')[0];
+      match /items/{itemId} {
+        allow read, write: if request.auth != null && request.auth.uid == uid.split('_')[0];
+      }
+    }
+    
+    match /jobs/{jobId} {
+      allow read: if true;
+      allow write: if request.auth != null && (request.auth.token.role == 'employer' || request.auth.token.role == 'institution');
+    }
+
+    match /applications/{appId} {
+      allow read: if request.auth != null && (request.auth.uid == resource.data.candidateId || request.auth.uid == resource.data.employerId);
+      allow write: if request.auth != null && request.auth.uid == request.resource.data.candidateId;
+      allow update: if request.auth != null && request.auth.uid == resource.data.employerId;
+    }
+
+    match /global_jobs/{docId} {
+      allow read, write: if true;
+    }
+    
+    // Deadline call alerts — written by client when saving a job, read/updated by server cron
+    match /deadlineAlerts/{alertId} {
+      allow read, write: if true;
+    }
+    
+    match /geocache/{docId} {
+      allow read, write: if true;
+    }
+
+    // Employer-posted roles — readable by all authenticated users (candidates discover jobs here)
+    match /postedRoles/{roleId} {
+      allow read: if request.auth != null;
+      allow write: if request.auth != null;
+      match /applications/{appId} {
+        allow read: if request.auth != null;
+        allow write: if request.auth != null;
+      }
+    }
+
+    // collectionGroup rule: allows candidates to query ALL 'postedRoles' subcollections
+    // across ALL employer documents (required for collectionGroup(db, 'postedRoles'))
+    match /{path=**}/postedRoles/{roleId} {
+      allow read: if request.auth != null;
+    }
+
+    // Employer profile & subcollections
+    match /employers/{employerUid} {
+      allow read, write: if request.auth != null;
+      match /{subcollection}/{docId} {
+        allow read, write: if request.auth != null;
+        match /{subSubcollection}/{subDocId} {
+          allow read, write: if request.auth != null;
+        }
+      }
+    }
+
+    // User data — each user owns their own documents
+    match /users/{userId} {
+      allow read: if request.auth != null;
+      allow write: if request.auth != null && request.auth.uid == userId.split('_')[0];
+      match /{subcollection}/{docId} {
+        allow read: if request.auth != null;
+        allow write: if request.auth != null;
+        match /{subSubcollection}/{subDocId} {
+          allow read, write: if request.auth != null;
+        }
+      }
+    }
+
+    // Entrepreneurship, Mentorship & Incubation collections
+    match /ventures/{ventureId} {
+      allow read: if request.auth != null;
+      allow write: if request.auth != null;
+    }
+
+    match /ventureWorkspaces/{workspaceId} {
+      allow read, write: if request.auth != null;
+    }
+
+    match /collaborationRequests/{requestId} {
+      allow read: if request.auth != null;
+      allow write: if request.auth != null;
+    }
+
+    match /incubationPrograms/{programId} {
+      allow read: if request.auth != null;
+      allow write: if request.auth != null;
+    }
+
+    match /incubationApplications/{appId} {
+      allow read: if request.auth != null;
+      allow write: if request.auth != null;
+    }
+
+    match /mentors/{mentorId} {
+      allow read: if true;
+      allow write: if request.auth != null;
+    }
+
+    match /mentorshipRequests/{mentorUid}/{document=**} {
+      allow read, write: if request.auth != null;
+    }
+
+    match /mentorSessions/{sessionId} {
+      allow read, write: if request.auth != null;
+    }
+
+    match /academicProjects/{projectId} {
+      allow read: if true;
+      allow write: if request.auth != null;
+    }
+
+    match /moderationReports/{reportId} {
+      allow read, write: if request.auth != null;
+    }
+
+    // Default deny for everything else
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}
